@@ -47,3 +47,6 @@ Metrics/BlockLength:
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/**/*
+
+Rails/I18nLocaleTexts:
+  Enabled: false

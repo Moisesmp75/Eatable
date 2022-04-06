@@ -12,14 +12,14 @@ class ApplicationController < ActionController::API
   end
 
   def render_unauthorized(error_message)
-    render json: {errors: error_message}, status: :unauthorized
+    render json: { errors: error_message }, status: :unauthorized
   end
 
   private
-  
+
   def authenticate_token
-    authenticate_with_http_token {|token, _options|
-      User.where(token: token).first
-    }
+    authenticate_with_http_token do |token, _options|
+      User.where(token:).first
+    end
   end
 end
