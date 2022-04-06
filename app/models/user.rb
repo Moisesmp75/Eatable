@@ -8,7 +8,7 @@ class User < ApplicationRecord
                     presence: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP, message: "is invalid" }
 
-  validates :name, :phone, :address, presence: true, on: :update
+  validates :name, :phone, :address, presence: true, on: :update, allow_nil: true
 
   def invalidate_token
     update(token: nil)
@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   def self.authenticate(email, password)
     user = User.find_by(email:)
-    return false unless user || user.authenticate(password)
+    return false unless user&.authenticate(password)
 
     user.regenerate_token
     user
