@@ -9,12 +9,10 @@ class User < ApplicationRecord
 
   def self.authenticate(email, password)
     user = User.find_by(email: email)
-    return false unless user
+    return false unless user || user.authenticate(password)
     
-    if user.authenticate(password)
-      user.regenerate_token
-      user
-    end
+    user.regenerate_token
+    user
   end
 
 end
