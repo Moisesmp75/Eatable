@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Orders
+  resources :orders, only: %i[index create]
+
   # Products
   resources :products, only: %i[index show]
 

@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_token
   has_secure_password
 
+  has_many :orders, dependent: :destroy
+
   validates :email, uniqueness: true,
                     presence: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP, message: "is invalid" }
