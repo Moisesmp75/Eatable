@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/create'
-
   # Users
   resources :users, only: :create
   get "/profile", to: "users#show"
@@ -8,4 +6,5 @@ Rails.application.routes.draw do
 
   # Sessions
   post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 end

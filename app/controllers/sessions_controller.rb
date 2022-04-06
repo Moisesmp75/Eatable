@@ -11,5 +11,9 @@ class SessionsController < ApplicationController
       render_unauthorized("Invalid credentials")
     end
   end
-end
 
+  # DELETE /logout
+  def destroy
+    current_user.invalidate_token
+  end
+end
