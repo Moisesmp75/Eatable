@@ -17,9 +17,18 @@ class UsersController < ApplicationController
     render json: current_user
   end
 
+  # PATCH /profile
+  def update
+    if current_user.update(user_params)
+      render json: current_user, status: :ok
+    else
+      render json: {errors: current_user.errors}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
-    params.permit(:email, :password)
+    params.permit(:email, :password, :phone, :address, :name)
   end
 end
