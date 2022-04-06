@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_06_032724) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_06_040304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "orders", force: :cascade do |t|
+    t.date "date"
+    t.integer "products_count", default: 0
+    t.integer "total", default: 0
+    t.string "delivery_address"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "category"
+    t.text "description"
+    t.string "picture_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_products_on_name", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -27,4 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_06_032724) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "orders", "users"
 end

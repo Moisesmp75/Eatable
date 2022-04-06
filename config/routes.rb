@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Products
+  resources :products, only: %i[index show]
+
   # Users
   resources :users, only: :create
   get "/profile", to: "users#show"
