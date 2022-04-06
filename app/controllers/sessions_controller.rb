@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  
+  skip_before_action :require_login!
+
   # POST /login
   def create
     user = User.authenticate(params[:email], params[:password])
@@ -7,7 +8,7 @@ class SessionsController < ApplicationController
     if user
       render json: user, status: :ok
     else
-      render json: {errors: "Invalid credentials"}, status: :unauthorized
+      render_unauthorized("Invalid credentials")
     end
   end
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login!, only: :create
 
   # POST /users
   def create
@@ -11,6 +12,10 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /profile
+  def show
+    render json: current_user
+  end
 
   private
 
