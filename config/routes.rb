@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :orders, only: %i[index create]
 
   # Products
-  resources :products, only: %i[index show]
+  resources :products
 
   # Users
   resources :users, only: :create
