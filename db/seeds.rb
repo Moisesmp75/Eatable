@@ -1,6 +1,8 @@
 require "faker"
 p "Seeding DB"
 
+Product.destroy_all
+
 products = [
   { name: "green cream",
     category: "soups",
